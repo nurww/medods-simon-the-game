@@ -1,19 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <simon />
+      <gameStart />
+      <gameOptions />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import simon from "./components/simon.vue";
+import gameStart from "./components/gameStart.vue";
+import gameOptions from "./components/gameOptions.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    simon,
+    gameStart,
+    gameOptions,
+  },
+};
 </script>
 
 <style>
@@ -21,8 +28,27 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  font-family: Arial, serif;
+  color: #333;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  -o-user-select: none;
+  user-select: none;
+}
+
+h1 {
+  margin: 1em 0 2em;
+  text-align: center;
+}
+
+.container {
+  width: 540px;
+  margin: 0 auto;
 }
 </style>
