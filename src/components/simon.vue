@@ -1,10 +1,34 @@
 <template>
   <div class="simon">
-    <ul @click="test5">
-      <li class="red" :class="tile == 1 ? 'active' : ''" data-tile="1"></li>
-      <li class="blue" :class="tile == 2 ? 'active' : ''" data-tile="2"></li>
-      <li class="yellow" :class="tile == 3 ? 'active' : ''" data-tile="3"></li>
-      <li class="green" :class="tile == 4 ? 'active' : ''" data-tile="4"></li>
+    <ul @click="registerClick">
+      <li
+        v-on:mousedown="addActive"
+        v-on:mouseup="removeActive"
+        class="red"
+        :class="tile == 1 ? 'active' : ''"
+        data-tile="1"
+      ></li>
+      <li
+        v-on:mousedown="addActive"
+        v-on:mouseup="removeActive"
+        class="blue"
+        :class="tile == 2 ? 'active' : ''"
+        data-tile="2"
+      ></li>
+      <li
+        v-on:mousedown="addActive"
+        v-on:mouseup="removeActive"
+        class="yellow"
+        :class="tile == 3 ? 'active' : ''"
+        data-tile="3"
+      ></li>
+      <li
+        v-on:mousedown="addActive"
+        v-on:mouseup="removeActive"
+        class="green"
+        :class="tile == 4 ? 'active' : ''"
+        data-tile="4"
+      ></li>
     </ul>
   </div>
 </template>
@@ -14,17 +38,30 @@ import store from "../store/index";
 
 export default {
   methods: {
-    test5: function(e) {
-      console.log(e.target.dataset.tile)
-    }
+    registerClick: function (e) {
+      this.active ? store.commit("registerClick", e.target.dataset.tile) : null;
+
+      console.log(store.getters.active, store.getters.copy.length === 0);
+      if (store.getters.active && store.getters.copy.length === 0) {
+        store.dispatch("newRound");
+      }
+    },
+    addActive: function (e) {
+      this.active ? e.target.classList.add("active") : null;
+    },
+    removeActive: function (e) {
+      this.active ? e.target.classList.remove("active") : null;
+    },
   },
   computed: {
     tile: {
       get() {
-        return store.state.tile;
+        return store.getters.tile;
       },
-      set(value) {
-        store.commit(value);
+    },
+    active: {
+      get() {
+        return store.getters.active;
       },
     },
   },

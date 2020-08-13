@@ -2,7 +2,7 @@
   <div class="game-info">
     <h2>
       Round:
-      <span data-round="0">0</span>
+      <span data-round="0">{{ round }}</span>
     </h2>
     <button @click="startRoundAndNewRound" data-action="start">Start</button>
     <p data-action="lose">
@@ -18,10 +18,14 @@ export default {
   methods: {
     startRoundAndNewRound: function () {
       store.commit("startRound");
-      store.commit("newRound");
-      store.commit("animate");
-      // store.commit("test2");
-      console.log(store.getters.tile);
+      store.dispatch("newRound");
+    },
+  },
+  computed: {
+    round: {
+      get() {
+        return store.getters.round;
+      },
     },
   },
 };
